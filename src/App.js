@@ -3,16 +3,19 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserToStore, removeUserFromStore } from "./redux/authSlice";
-import Layout from "./components/layout";
-import Navigation from "./components/navigation/navigation";
+import Layout from "./components/Layout";
+import Navigation from "./components/navigation/Navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/home";
-import About from "./pages/about";
-import Contact from "./pages/contact";
-import Pricing from "./pages/pricing";
-import Services from "./pages/services";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "./utils/theme";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import TodoListsPage from "./pages/TodoListsPage";
+import GroceryListPage from "./pages/GroceryListPage";
+import AccountPage from "./pages/AccountPage";
+import Loading from "./components/auth/loading";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,21 +40,22 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <ChakraProvider theme={theme}>
+      <BrowserRouter>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/todo-list" element={<TodoListsPage />} />
+          <Route path="/grocery-list" element={<GroceryListPage />} />
+          <Route path="/account" element={<AccountPage />} />
+        </Routes>
+      </BrowserRouter>
       <Layout>
-        <BrowserRouter>
-          <Navigation />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="services" element={<Services />} />
-            <Route path="pricing" element={<Pricing />} />
-            <Route path="contact" element={<Contact />} />
-          </Routes>
-        </BrowserRouter>
+        {isLoading ? <Loading /> : null}
         <ToastContainer limit={3} autoClose={2500} position="bottom-center" />
       </Layout>
-    </>
+    </ChakraProvider>
   );
 }
 

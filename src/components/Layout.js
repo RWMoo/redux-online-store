@@ -1,7 +1,8 @@
 import React from "react";
+import { Container } from "@chakra-ui/react";
 
 const Layout = ({ children }) => {
-  return <div>{children}</div>;
+  return <Container>{children}</Container>;
 };
 
 export default Layout;

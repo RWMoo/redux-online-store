@@ -40,7 +40,7 @@ export const authSlice = createSlice({
     },
     removeUserFromStore: (state) => {
       state.currentUser = null;
-      state.isLoggedIn = true;
+      state.isLoggedIn = false;
     },
   },
   extraReducers: {

@@ -2,8 +2,10 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/authSlice";
 import { toast } from "react-toastify";
+import { IconButton } from "@chakra-ui/react";
+import { SignOut } from "phosphor-react";
 
-const Logout = () => {
+const LogoutButton = () => {
   const dispatch = useDispatch();
 
   const logoutHandler = (e) => {
@@ -14,10 +16,12 @@ const Logout = () => {
   };
 
   return (
-    <button type="submit" onClick={logoutHandler}>
-      Sign Out
-    </button>
+    <IconButton
+      onClick={logoutHandler}
+      aria-label="Account"
+      icon={<SignOut />}
+    />
   );
 };
 
-export default Logout;
+export default LogoutButton;

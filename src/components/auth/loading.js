@@ -1,11 +1,26 @@
 import React from "react";
-import { Spinner } from "flowbite-react";
-
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 const Loading = () => {
   return (
-    <div className="transition ease-in-out delay-150 top-0 left-0 fixed justify-center items-center flex h-screen w-screen">
-      <Spinner aria-label="Extra large spinner example" size="xl" />
-    </div>
+    <Box
+      zIndex={10}
+      bg="rgba(0,0,0,0.1)"
+      h="100vh"
+      w="100vw"
+      position="fixed"
+      top={0}
+      left={0}
+    >
+      <Flex h="100%" justify="center" align="center">
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+    </Box>
   );
 };
 
